@@ -26,20 +26,22 @@ public class Demo {
         ac.printDetails();
 
         //Inheritted objects
-        System.out.println("\nInheritted objects:");
-        LivingRoomTV tv2 = new LivingRoomTV();
-        LivingRoomAC ac2 = new LivingRoomAC();
-        tv2.setBrand("Samsung");
-        tv2.setPixel("3840x2160px");
-        tv2.setColor("Black");
-        tv2.setRemoteBrand("Samsung");
-        tv2.setBatteryBrand("ABC");
-        tv2.printDetails();
-        ac2.setBrand("Panasonic");
-        ac2.setModel("Bleh-1234");
-        ac2.setColor("White");
-        ac2.setRemoteBrand("Panasonic");
-        ac2.setBatteryBrand("ABC");
-        ac2.printDetails();
+        //Drawer
+        Drawer drawer = new Drawer();
+        drawer.setBrand("IKEA");
+        drawer.setMaterial("Wood");
+        drawer.setColor("Light Brown");
+        drawer.openDrawer(0, true);
+        drawer.openDrawer(1, false);
+        drawer.openDrawer(2, true);
+        drawer.printStatus();
+
+        //AndroidTV
+        AndroidTV androidTV = new AndroidTV();
+        androidTV.setBrand("Samsung");
+        androidTV.setPixel("3840x2160px");
+        androidTV.setColor("Black");
+        androidTV.setDisplayOutput("Netflix");
+        androidTV.printDetails();
     }
 }
