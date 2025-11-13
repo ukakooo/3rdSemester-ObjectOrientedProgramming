@@ -20,7 +20,7 @@ public class InternshipEmployee extends Employee {
     public String getEmployeeInfo() {
         // TODO Auto-generated method stub
         String info = super.getEmployeeInfo() + "\n";
-        info += "Registered as internship employee for " + length + " months/s\n";
+        info += "Registered as internship employee for " + length + " months\n";
         return info;
     }
 }

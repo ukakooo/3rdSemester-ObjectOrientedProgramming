@@ -4,6 +4,6 @@ public class Employee {
     protected String name;
 
     public String getEmployeeInfo() {
-        return "Name: " + name;
+        return "Name: " + name + "\n";
     }
 }
