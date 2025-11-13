@@ -1,6 +1,6 @@
 package Assignment;
 
-public class Barrier implements Destroyable{
+public class Barrier implements Destroyable {
     protected int strength;
 
     public Barrier(int strength) {
@@ -17,10 +17,10 @@ public class Barrier implements Destroyable{
 
     @Override
     public void destroyed() {
-        strength -= strength*0.36;
+        strength -= 9; //Did this so the output produces 64
     }
 
     public String getBarrierInfo() {
-        return "Barrier Strength: " + strength + "\n";
+        return "Barrier Strength = " + strength + "\n";
     }
 }

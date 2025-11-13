@@ -10,24 +10,28 @@ public class JumpingZombie extends Zombie{
     public void heal() {
         switch (level) {
             case 1:
-                health += health*0.3;
+                //Zombie healed by 30% in lv 1
+                health += health * 0.3;
                 break;
             case 2:
-                health += health*0.4;
+                //Zombie healed by 40% in lv 2
+                health += health * 0.4;
                 break;
             case 3:
-                health += health*0.5;
+                //Zombie healed by 50% in lv 3
+                health += health  *0.5;
                 break;
         }
     }
 
     @Override
     public void destroyed() {
-        health -= health*0.01;
+        //Zombie got rekt by 1%
+        health -= health * 0.01;
     }
 
     @Override
     public String getZombieInfo() {
-        return "Jumping Zombie Data=\n" + super.getZombieInfo();
+        return "Jumping Zombie Data =\n" + super.getZombieInfo();
     }
 }

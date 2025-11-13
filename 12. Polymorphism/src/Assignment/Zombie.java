@@ -5,7 +5,10 @@ public abstract class Zombie implements Destroyable {
 
     public abstract void heal();
 
+    @Override
+    public abstract void destroyed();
+
     public String getZombieInfo() {
-        return "Health: " + health + "\nLevel: " + level + "\n";
+        return "Health: " + (int) this.health + "\nLevel: " + this.level + "\n";
     }
 }
