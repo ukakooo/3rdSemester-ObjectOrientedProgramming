@@ -8,23 +8,22 @@ package frontend;
  *
  * @author PC
  */
-
 import backend.*;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.DefaultComboBoxModel;
-public class FrmBook extends javax.swing.JFrame {
+public class FrmLoan extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmBook.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmLoan.class.getName());
 
     /**
-     * Creates new form FrmBook
+     * Creates new form FrmLoan
      */
-    public FrmBook() {
+    public FrmLoan() {
         initComponents();
         tampilkanData();
-        tampilkanCmbKategori();
         kosongkanForm();
+        
     }
 
     /**
@@ -41,35 +40,34 @@ public class FrmBook extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        txtIdLoan = new javax.swing.JTextField();
+        txtIdMember = new javax.swing.JTextField();
         txtIdBook = new javax.swing.JTextField();
-        txtTitle = new javax.swing.JTextField();
-        txtPublisher = new javax.swing.JTextField();
-        txtAuthor = new javax.swing.JTextField();
-        cmbCategory = new javax.swing.JComboBox<>();
+        txtBorrowDate = new javax.swing.JTextField();
+        txtReturnDate = new javax.swing.JTextField();
         btnSave = new javax.swing.JButton();
         btnNewAddUp = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
-        txtSearch = new javax.swing.JTextField();
-        btnSearch = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblBooks = new javax.swing.JTable();
+        btnSearchMem = new javax.swing.JButton();
+        btnSearchBook = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Book ID");
+        jLabel1.setText("ID");
 
-        jLabel2.setText("Category");
+        jLabel2.setText("ID Anggota");
 
-        jLabel3.setText("Title");
+        jLabel3.setText("ID Buku");
 
-        jLabel4.setText("Publisher");
+        jLabel4.setText("Tanggal Pinjam");
 
-        jLabel5.setText("Author");
+        jLabel5.setText("Tanggal Kembali");
 
-        txtIdBook.setEnabled(false);
-        txtIdBook.addActionListener(this::txtIdBookActionPerformed);
-
-        cmbCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        txtIdLoan.setEnabled(false);
 
         btnSave.setText("Save");
         btnSave.addActionListener(this::btnSaveActionPerformed);
@@ -79,11 +77,6 @@ public class FrmBook extends javax.swing.JFrame {
 
         btnDelete.setText("Hapus");
         btnDelete.addActionListener(this::btnDeleteActionPerformed);
-
-        txtSearch.addActionListener(this::txtSearchActionPerformed);
-
-        btnSearch.setText("Find");
-        btnSearch.addActionListener(this::btnSearchActionPerformed);
 
         tblBooks.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -103,6 +96,16 @@ public class FrmBook extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblBooks);
 
+        btnSearchMem.setText("Cari");
+        btnSearchMem.addActionListener(this::btnSearchMemActionPerformed);
+
+        btnSearchBook.setText("Cari");
+        btnSearchBook.addActionListener(this::btnSearchBookActionPerformed);
+
+        jLabel6.setText("Nama Anggota");
+
+        jLabel7.setText("Judul Buku");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -112,33 +115,45 @@ public class FrmBook extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5))
-                        .addGap(36, 36, 36)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPublisher, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtIdBook, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmbCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnNewAddUp, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnDelete))
+                            .addComponent(btnSave))
+                        .addGap(262, 262, 262))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnNewAddUp, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnDelete)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnSearch))
-                            .addComponent(btnSave))
-                        .addGap(6, 6, 6))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap())
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5))
+                                .addGap(36, 36, 36)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtReturnDate, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtBorrowDate, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtIdLoan, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(txtIdBook, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtIdMember, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(btnSearchBook)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jLabel7))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(btnSearchMem)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jLabel6)))))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -146,31 +161,33 @@ public class FrmBook extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtIdBook, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtIdLoan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(cmbCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtIdMember, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearchMem)
+                    .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(txtTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtIdBook, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearchBook)
+                    .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(txtPublisher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtBorrowDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(txtAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtReturnDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnSave)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNewAddUp)
-                    .addComponent(btnDelete)
-                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSearch))
+                    .addComponent(btnDelete))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -180,32 +197,34 @@ public class FrmBook extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     public void kosongkanForm() {
-        txtIdBook.setText("0");
-        cmbCategory.setSelectedIndex(0);
-        txtTitle.setText("");
-        txtAuthor.setText("");
-        txtPublisher.setText("");
+        txtIdLoan.setText("0");
+        txtIdBook.setText("");
+        txtIdMember.setText("");
+        txtBorrowDate.setText("");
+        txtReturnDate.setText("");
     }
     
     public void tampilkanData() {
-        String[] kolom = {"ID", "Kategori", "Judul", "Penulis", "Penerbit"};
-        ArrayList<Book> list = new Book().getAll();
+        String[] kolom = {"ID", "Anggota", "Buku", "Tanggal Pinjam", "Tanggal Balik"};
+        ArrayList<Borrowing> list = new Borrowing().getAll();
         Object rowData[] = new Object[5];
+        
+        System.out.println("Number of books found: " + list.size());
         
         tblBooks.setModel(new DefaultTableModel(new Object[][] {}, kolom));
         
         for (int i = 0; i < list.size(); i++) {
-            rowData[0] = list.get(i).getIdbook();
-            rowData[1] = list.get(i).getCategory().getNama();
-            rowData[2] = list.get(i).getTitle();
-            rowData[3] = list.get(i).getAuthor();
-            rowData[4] = list.get(i).getPublisher();
+            rowData[0] = list.get(i).getIdpeminjaman();
+            rowData[1] = list.get(i).getMember().getNama();
+            rowData[2] = list.get(i).getBook().getTitle();
+            rowData[3] = list.get(i).getBorrowDate();
+            rowData[4] = list.get(i).getReturnDate();
             
             ((DefaultTableModel)tblBooks.getModel()).addRow(rowData);
         }
     }
     
-    public void cari(String keyword) {
+    public void cariBuku(String keyword) {
         String[] kolom = {"ID", "Kategori", "Judul", "Penulis", "Penerbit"};
         ArrayList<Book> list = new Book().search(keyword);
         Object rowData[] = new Object[5];
@@ -223,23 +242,36 @@ public class FrmBook extends javax.swing.JFrame {
         }
     }
     
-    public void tampilkanCmbKategori() {
-        cmbCategory.setModel(new DefaultComboBoxModel(new Category().getAll().toArray()));
+    public void cariAnggota(String keyword) {
+        String[] kolom = {"ID", "Nama", "Alamat", "Telepon"};
+        ArrayList<Members> list = new Members().search(keyword);
+        Object rowData[] = new Object[4];
+        
+        tblBooks.setModel(new DefaultTableModel(new Object[][] {}, kolom));
+        
+        for(Members mem : list) {
+            rowData[0] = mem.getIdanggota();
+            rowData[1] = mem.getNama();
+            rowData[2] = mem.getAlamat();
+            rowData[3] = mem.getTelepon();
+            
+            ((DefaultTableModel) tblBooks.getModel()).addRow(rowData);
+        }
     }
-
-    
+        
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
-        Book book = new Book();
-        book.setIdbook(Integer.parseInt(txtIdBook.getText()));
-        book.setCategory((Category)cmbCategory.getSelectedItem());
-        book.setTitle(txtTitle.getText());
-        book.setAuthor(txtAuthor.getText());
-        book.setPublisher(txtPublisher.getText());
-        book.save();
+        Borrowing borrowing = new Borrowing();
+        borrowing.setIdpeminjaman(Integer.parseInt(txtIdLoan.getText()));
+        borrowing.getMember().setIdanggota(Integer.parseInt(txtIdMember.getText()));
+        borrowing.getBook().setIdbook(Integer.parseInt(txtIdBook.getText()));
+        borrowing.setBorrowDate(txtBorrowDate.getText());
+        borrowing.setReturnDate(txtReturnDate.getText());
         
-        txtIdBook.setText(Integer.toString(book.getIdbook()));
-        
+        borrowing.save();
+
+        txtIdLoan.setText(Integer.toString(borrowing.getIdpeminjaman()));
+
         tampilkanData();
     }//GEN-LAST:event_btnSaveActionPerformed
 
@@ -252,40 +284,38 @@ public class FrmBook extends javax.swing.JFrame {
         // TODO add your handling code here:
         DefaultTableModel model = (DefaultTableModel)tblBooks.getModel();
         int row = tblBooks.getSelectedRow();
-        
-        Book book = new Book().getById(Integer.parseInt(model.getValueAt(row, 0).toString()));
-        book.delete();
+
+        Borrowing borrowing = new Borrowing().getById(Integer.parseInt(model.getValueAt(row, 0).toString()));
+        borrowing.delete();
         kosongkanForm();
         tampilkanData();
     }//GEN-LAST:event_btnDeleteActionPerformed
-
-    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        // TODO add your handling code here:
-        cari(txtSearch.getText());
-    }//GEN-LAST:event_btnSearchActionPerformed
 
     private void tblBooksMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBooksMouseClicked
         // TODO add your handling code here:
         DefaultTableModel model = (DefaultTableModel)tblBooks.getModel();
         int row = tblBooks.getSelectedRow();
-        Book book = new Book();
-        
-        book = book.getById(Integer.parseInt(model.getValueAt(row, 0).toString()));
-        
-        txtIdBook.setText(String.valueOf(book.getIdbook()));
-        cmbCategory.getModel().setSelectedItem(book.getCategory());
-        txtTitle.setText(book.getTitle());
-        txtPublisher.setText(book.getPublisher());
-        txtAuthor.setText(book.getAuthor());
+        Borrowing borrowing = new Borrowing();
+
+        borrowing = borrowing.getById(Integer.parseInt(model.getValueAt(row, 0).toString()));
+
+        txtIdLoan.setText(String.valueOf(borrowing.getIdpeminjaman()));
+        txtIdMember.setText(String.valueOf(borrowing.getMember().getNama()));
+        txtIdBook.setText(String.valueOf(borrowing.getBook().getTitle()));
+        txtBorrowDate.setText(String.valueOf(borrowing.getBorrowDate()));
+        txtReturnDate.setText(String.valueOf(borrowing.getReturnDate()));
     }//GEN-LAST:event_tblBooksMouseClicked
 
-    private void txtIdBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdBookActionPerformed
+    private void btnSearchBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchBookActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtIdBookActionPerformed
+        cariBuku(txtIdBook.getText());
+    }//GEN-LAST:event_btnSearchBookActionPerformed
 
-    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
+    private void btnSearchMemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchMemActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearchActionPerformed
+        cariAnggota(txtIdMember.getText());
+        
+    }//GEN-LAST:event_btnSearchMemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -309,26 +339,28 @@ public class FrmBook extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new FrmBook().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new FrmLoan().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnNewAddUp;
     private javax.swing.JButton btnSave;
-    private javax.swing.JButton btnSearch;
-    private javax.swing.JComboBox<String> cmbCategory;
+    private javax.swing.JButton btnSearchBook;
+    private javax.swing.JButton btnSearchMem;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblBooks;
-    private javax.swing.JTextField txtAuthor;
+    private javax.swing.JTextField txtBorrowDate;
     private javax.swing.JTextField txtIdBook;
-    private javax.swing.JTextField txtPublisher;
-    private javax.swing.JTextField txtSearch;
-    private javax.swing.JTextField txtTitle;
+    private javax.swing.JTextField txtIdLoan;
+    private javax.swing.JTextField txtIdMember;
+    private javax.swing.JTextField txtReturnDate;
     // End of variables declaration//GEN-END:variables
 }

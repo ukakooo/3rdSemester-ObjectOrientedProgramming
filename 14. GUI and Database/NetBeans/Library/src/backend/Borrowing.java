@@ -1,13 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package backend;
-
-/**
- *
- * @author PC
- */
 
 import java.util.ArrayList;
 import java.sql.*;
@@ -73,7 +64,8 @@ public class Borrowing {
 
     public Borrowing getById(int id) {
         Borrowing borrowing = new Borrowing();
-        String query = "SELECT p.idpeminjaman, p.tanggalpinjam, p.tanggalkembali, "
+        // FIXED: Added a comma and space after p.tanggalkembali
+        String query = "SELECT p.idpeminjaman, a.nama AS nama_anggota, b.judul AS judul_buku, p.tanggalpinjam, p.tanggalkembali, "
                 + "p.idanggota, p.idbuku, "
                 + "a.idanggota, a.nama AS nama_anggota, a.alamat, a.telepon, "
                 + "b.idbuku, b.judul, b.penerbit, b.penulis, b.idkategori "
@@ -90,8 +82,13 @@ public class Borrowing {
                 borrowing.setIdpeminjaman(rs.getInt("idpeminjaman"));
                 borrowing.setBorrowDate(rs.getString("tanggalpinjam"));
                 borrowing.setReturnDate(rs.getString("tanggalkembali"));
+                
+                // Using getters to access the objects directly
                 borrowing.getMember().setIdanggota(rs.getInt("idanggota"));
+                borrowing.getMember().setNama(rs.getString("nama_anggota"));
+                
                 borrowing.getBook().setIdbook(rs.getInt("idbuku"));
+                borrowing.getBook().setTitle(rs.getString("judul_buku")); // Changed to match alias
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -117,8 +114,12 @@ public class Borrowing {
                 borrowing.setIdpeminjaman(rs.getInt("idpeminjaman"));
                 borrowing.setBorrowDate(rs.getString("tanggalpinjam"));
                 borrowing.setReturnDate(rs.getString("tanggalkembali"));
+                
                 borrowing.getMember().setIdanggota(rs.getInt("idanggota"));
+                borrowing.getMember().setNama(rs.getString("nama_anggota"));
+                
                 borrowing.getBook().setIdbook(rs.getInt("idbuku"));
+                borrowing.getBook().setTitle(rs.getString("judul"));
 
                 ListBorrowing.add(borrowing);
             }
@@ -148,8 +149,12 @@ public class Borrowing {
                 borrowing.setIdpeminjaman(rs.getInt("idpeminjaman"));
                 borrowing.setBorrowDate(rs.getString("tanggalpinjam"));
                 borrowing.setReturnDate(rs.getString("tanggalkembali"));
+                
                 borrowing.getMember().setIdanggota(rs.getInt("idanggota"));
+                borrowing.getMember().setNama(rs.getString("nama_anggota"));
+                
                 borrowing.getBook().setIdbook(rs.getInt("idbuku"));
+                borrowing.getBook().setTitle(rs.getString("judul"));
 
                 ListBorrowing.add(borrowing);
             }
